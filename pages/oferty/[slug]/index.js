@@ -173,6 +173,7 @@ const OfferPage = ({data}) => {
                         <>
                             <Main>
                                 <img src={data.pictures[0].url}/>
+                                //TODO add slider and don't forget about alt att
                                 <DetailsWrapper>
                                     <InfoWrapper>
                                         <h1>{data.title}</h1>
