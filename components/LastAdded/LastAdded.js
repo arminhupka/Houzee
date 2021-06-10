@@ -31,7 +31,7 @@ const LastAdded = ({offers}) => (
             <Heading title="Ostatnio dodane oferty"
                      subtitle="With the features and filters provided with the Houzez widgets you can turn your visitors attention to the latest listings or the ones that are most profitable to buy at the moment." position="center"/>
             <StyledGrid>
-                {offers.map(offer => <OfferCard title={offer.title} category={offer.category} city={offer.city} pictures={offer.pictures} price={offer.price} purpose={offer.purpose} slug={offer.slug} street={offer.street} size={offer.propertySize} bedrooms={offer.bedrooms} bathrooms={offer.bathrooms} garage={offer.garage}/> )}
+                {offers.map(offer => <OfferCard key={offer.id} title={offer.title} category={offer.category} city={offer.city} pictures={offer.pictures} price={offer.price} purpose={offer.purpose} slug={offer.slug} street={offer.street} size={offer.propertySize} bedrooms={offer.bedrooms} bathrooms={offer.bathrooms} garage={offer.garage}/> )}
             </StyledGrid>
         </StyledContainer>
     </StyledSection>

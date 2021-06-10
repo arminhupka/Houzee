@@ -94,6 +94,7 @@ const DetailsInfo = styled.span`
 const OfferCard = ({category, city, pictures, price, purpose, slug, street, title, size, bathrooms, bedrooms, garage}) => {
 
 
+
     return (
         <CardWrapper>
             <Link href={`/oferty/${slug}`}>

@@ -1,10 +1,6 @@
 import styled, {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap');
-
   *, *::before, *::after {
     padding: 0;
     margin: 0;

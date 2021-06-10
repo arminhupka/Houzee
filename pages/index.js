@@ -38,6 +38,7 @@ export const getStaticProps = async () => {
     const offersQuery = `
     {
       allOffers {
+        id
         title
         slug
         pictures {

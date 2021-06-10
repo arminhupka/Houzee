@@ -1,11 +1,15 @@
 import {Container} from "../../styles/GlobalStyle";
+import PageHeading from "../../components/PageHeading/PageHeading";
 
 const ContactPage = () => (
-    <section>
-        <Container>
-            <h1>Contact Page</h1>
-        </Container>
-    </section>
+    <>
+        <PageHeading title="Kontakt"/>
+        <section>
+            <Container>
+                <h1>Contact Page</h1>
+            </Container>
+        </section>
+    </>
 )
 
 export default ContactPage

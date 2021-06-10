@@ -7,7 +7,7 @@ import devices from "../../styles/devices";
 
 const HeroWrapper = styled.div`
   position: relative;
-  height: 20rem;
+  height: 40rem;
   background: url(${slide1}) center no-repeat;
   background-size: cover;
 
@@ -45,10 +45,6 @@ const HeroWrapper = styled.div`
       }
     }
     
-  }
-
-  @media screen and ${devices.md} {
-    height: 40rem;
   }
 
   @media screen and ${devices.lg} {
