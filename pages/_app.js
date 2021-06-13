@@ -5,6 +5,7 @@ import theme from "../styles/theme";
 import MainLayout from "../layouts/MainLayout";
 
 
+
 function MyApp({Component, pageProps}) {
     return (
         <ThemeProvider theme={theme}>

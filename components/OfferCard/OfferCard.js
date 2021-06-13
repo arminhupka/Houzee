@@ -44,6 +44,10 @@ const LabelsWrapper = styled.div`
   align-self: flex-end;
   display: flex;
   z-index: 2;
+  
+  ${Label} {
+    margin-left: 1rem;
+  }
 `
 
 const PricingWrapper = styled.div`

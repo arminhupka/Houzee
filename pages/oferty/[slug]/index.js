@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Head from "next/head";
 import {useRouter} from "next/router";
+import dynamic from "next/dynamic";
 
 import {Container} from "../../../styles/GlobalStyle";
 import devices from "../../../styles/devices";
@@ -8,10 +9,14 @@ import devices from "../../../styles/devices";
 import Button from "../../../components/Elements/Button/Button";
 import Input from "../../../components/Elements/Input/Input";
 import Separator from "../../../components/Elements/Separator/Separator";
-
+import Label from "../../../components/Elements/Label/Label";
+import LinkButton from "../../../components/Elements/LinkButton/LinkButton";
 
 import {request} from "../../../lib/datocms";
 import priceFormatter from "../../../lib/priceFormatter";
+
+const Map = dynamic(() => import('../../../components/Map/Map'), {ssr: false})
+
 
 const Layout = styled.div`
   display: grid;
@@ -27,7 +32,7 @@ const Layout = styled.div`
 
 const Main = styled.main`
   grid-area: main;
-  
+
   & > img {
     width: 100%;
     height: auto;
@@ -47,7 +52,7 @@ const AgentContact = styled.div`
   & > * {
     margin-bottom: 1rem;
   }
-  
+
   @media screen and ${devices.lg} {
     position: sticky;
     top: 2rem;
@@ -98,12 +103,32 @@ const DetailsWrapper = styled.div`
 
   @media screen and ${devices.lg} {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+  }
+`
+
+const LabelsWrapper = styled.div`
+  margin-bottom: 1rem;
+  display: flex;
+
+  ${Label} {
+    margin-right: 1rem;
+  }
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media screen and ${devices.md} {
+    flex-direction: row;
     justify-content: space-between;
   }
 `
 
+
 const InfoWrapper = styled.div`
+  margin-bottom: 1rem;
+
   h1 {
     font-size: 3rem;
   }
@@ -173,16 +198,22 @@ const OfferPage = ({data}) => {
                         <>
                             <Main>
                                 <img src={data.pictures[0].url}/>
-                                //TODO add slider and don't forget about alt att
+                                {/*TODO: `add slider and don't forget about alt att`*/}
                                 <DetailsWrapper>
-                                    <InfoWrapper>
-                                        <h1>{data.title}</h1>
-                                        <address>{data.street}, {data.city}</address>
-                                    </InfoWrapper>
-                                    <PricingWrapper>
-                                        <p>{priceFormatter(data.price)}</p>
-                                        <p>{priceFormatter(data.price / data.propertySize)} / m<sup>2</sup></p>
-                                    </PricingWrapper>
+                                    <LabelsWrapper>
+                                        <Label large>{data.category}</Label>
+                                        <Label large>{data.purpose}</Label>
+                                    </LabelsWrapper>
+                                    <Row>
+                                        <InfoWrapper>
+                                            <h1>{data.title}</h1>
+                                            <address>{data.street}, {data.city}</address>
+                                        </InfoWrapper>
+                                        <PricingWrapper>
+                                            <p>{priceFormatter(data.price)}</p>
+                                            <p>{priceFormatter(data.price / data.propertySize)} / m<sup>2</sup></p>
+                                        </PricingWrapper>
+                                    </Row>
                                 </DetailsWrapper>
                                 <Tab>
                                     <h1>Opis</h1>
@@ -210,11 +241,13 @@ const OfferPage = ({data}) => {
                                             <span>{data.voivodeship}</span>
                                         </TabItem>
                                     </TabList>
-                                    <Button>Zobacz w Google Maps</Button>
+                                    <LinkButton href={`https://maps.google.com/?q=${data.street} ${data.city}`}>Zobacz w
+                                        Google Maps</LinkButton>
                                 </Tab>
                                 <Tab>
                                     <h1>Mapa</h1>
                                     <Separator/>
+                                    <Map lat={data.localization.latitude} lng={data.localization.longitude} />
                                 </Tab>
                             </Main>
                             <Sidebar>
@@ -261,8 +294,14 @@ export const getStaticProps = async (ctx) => {
         postalCode
         description
         voivodeship
+        category
+        purpose
         pictures {
             url
+        }
+        localization {
+            latitude
+            longitude
         }
         agent {
             name
@@ -309,8 +348,6 @@ export const getStaticPaths = async () => {
     })
 
     const paths = allOffers.map(offer => ({params: {slug: offer.slug}}))
-
-    console.log(paths)
 
     return {
         paths,
