@@ -8,6 +8,7 @@ import device from "../../../styles/devices";
 
 import OfferCard from "../../../components/OfferCard/OfferCard";
 import AgentInfo from "../../../components/AgentInfo/AgentInfo";
+import AgentOffers from "../../../components/AgentOffers/AgentOffers";
 
 const StyledTab = styled.div`
   padding: 2rem;
@@ -32,6 +33,7 @@ const AgentDetailsPage = ({data}) => {
                     <section>
                         <Container>
                             <AgentInfo/>
+                            <AgentOffers offers={data.offers}/>
                         </Container>
                     </section>
                 </>
@@ -51,21 +53,21 @@ export const getStaticProps = async (ctx) => {
             url
         }
         offers {
-             id
-        title
-        slug
-        pictures {
-          url
-        }
-        street
-        city
-        category
-        purpose
-        price
-        propertySize
-        bedrooms
-        bathrooms
-        garage
+            id
+            title
+            slug
+            pictures {
+                url
+            }
+            street
+            city
+            category
+            purpose
+            price
+            propertySize
+            bedrooms
+            bathrooms
+            garage
         }
       }
     }
