@@ -17,6 +17,10 @@ import priceFormatter from "../../../lib/priceFormatter";
 
 const Map = dynamic(() => import('../../../components/Map/Map'), {ssr: false})
 
+import img1 from '../../../assets/img/slide1.jpeg'
+import img2 from '../../../assets/img/slide2.jpeg'
+import img3 from '../../../assets/img/slide3.jpeg'
+import Slider from "../../../components/Slider/Slider";
 
 const Layout = styled.div`
   display: grid;
@@ -185,6 +189,8 @@ const OfferPage = ({data}) => {
 
     const router = useRouter();
 
+    const images = [img1, img2, img3]
+
     return (
         <Container>
             <Head>
@@ -197,8 +203,8 @@ const OfferPage = ({data}) => {
                         :
                         <>
                             <Main>
-                                <img src={data.pictures[0].url}/>
-                                {/*TODO: `add slider and don't forget about alt att`*/}
+                                <Slider images={images}/>
+                                {/*<img src={data.pictures[0].url}/>*/}
                                 <DetailsWrapper>
                                     <LabelsWrapper>
                                         <Label large>{data.category}</Label>
